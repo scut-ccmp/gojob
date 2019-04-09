@@ -1,14 +1,14 @@
 package gojob
 
 import (
+	"io"
+	"io/ioutil"
+	"os"
+	"path"
+	"path/filepath"
+	"strconv"
 	"sync"
 	"time"
-	"os"
-	"strconv"
-	"path/filepath"
-	"io/ioutil"
-	"io"
-	"path"
 
 	"github.com/pkg/sftp"
 )

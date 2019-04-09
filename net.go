@@ -1,16 +1,16 @@
 package gojob
 
 import (
-	"time"
 	"fmt"
+	"time"
 
-	"golang.org/x/crypto/ssh"
 	"github.com/pkg/sftp"
+	"golang.org/x/crypto/ssh"
 )
 
 type Conn struct {
 	Connect *ssh.Client
-	Client	*sftp.Client
+	Client  *sftp.Client
 }
 
 func NewConnect(user, password, host, port string) (*Conn, error) {
@@ -42,7 +42,7 @@ func NewConnect(user, password, host, port string) (*Conn, error) {
 
 	conn := &Conn{
 		Connect: sshConn,
-		Client: client,
+		Client:  client,
 	}
 
 	return conn, nil

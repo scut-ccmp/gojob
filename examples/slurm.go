@@ -1,11 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
-	"fmt"
-	"time"
 	"text/template"
+	"time"
 
 	"github.com/scut-ccmp/flowmat/gojob"
 	"github.com/spf13/viper"
@@ -49,9 +49,9 @@ func main() {
 
 	// prepare _job.sh file
 	slurm := gojob.SlurmParameter{
-		Name: "flowmat",
-		NProc: viper.GetString("job.nproc"),
-		NCom: viper.GetString("job.ncom"),
+		Name:    "flowmat",
+		NProc:   viper.GetString("job.nproc"),
+		NCom:    viper.GetString("job.ncom"),
 		Partion: viper.GetString("job.partion"),
 		Prepend: viper.GetString("job.prepend"),
 		ExecCmd: viper.GetString("job.exec"),

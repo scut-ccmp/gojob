@@ -1,27 +1,26 @@
 package gojob
 
 import (
+	"fmt"
 	"regexp"
 	"strconv"
-	"fmt"
 )
 
 type SlurmParameter struct {
-	Name string
-	NProc string
-	NCom string
+	Name    string
+	NProc   string
+	NCom    string
 	Partion string
 	Prepend string
 	ExecCmd string
-	Append string
+	Append  string
 }
 
-type SlurmMgt struct {}
+type SlurmMgt struct{}
 
 func NewSlurmMgt() SlurmMgt {
 	return SlurmMgt{}
 }
-
 
 func (m SlurmMgt) parseJobState(s []byte) (state string, err error) {
 	matched, err := regexp.Match(`Invalid job id specified`, s)
@@ -32,7 +31,7 @@ func (m SlurmMgt) parseJobState(s []byte) (state string, err error) {
 		return "NOJOBFOUND", nil
 	}
 
-  es := `(STATE)\s*(RUNNING|SUSPENDE|COMPLETING|PENDING)*`
+	es := `(STATE)\s*(RUNNING|SUSPENDE|COMPLETING|PENDING)*`
 	re := regexp.MustCompile(es)
 	result := re.FindSubmatch(s)
 	match := result[2]
@@ -62,7 +61,7 @@ func (m SlurmMgt) FindJobState(conn *Conn, id int) (string, error) {
 }
 
 func (m SlurmMgt) parseJobID(s []byte) (id int) {
-  es := `^Submitted batch job (?P<jobID>\d+)`
+	es := `^Submitted batch job (?P<jobID>\d+)`
 	re := regexp.MustCompile(es)
 	result := re.FindSubmatch(s)
 	match := result[1]
@@ -86,13 +85,13 @@ func (m SlurmMgt) SubmitJob(conn *Conn, path string) (id int, err error) {
 }
 
 func (m SlurmMgt) CheckDoneFunc(conn *Conn, id int) (done bool, err error) {
-		state, err := m.FindJobState(conn, id)
-		if err != nil {
-			return true, fmt.Errorf("CheckDoneFunc: %v", err)
-		}
-		// fmt.Println(state)
-		if state == "NOJOBFOUND" {
-			return true, nil
-		}
-		return false, nil
+	state, err := m.FindJobState(conn, id)
+	if err != nil {
+		return true, fmt.Errorf("CheckDoneFunc: %v", err)
+	}
+	// fmt.Println(state)
+	if state == "NOJOBFOUND" {
+		return true, nil
+	}
+	return false, nil
 }
