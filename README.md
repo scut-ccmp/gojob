@@ -13,13 +13,13 @@ $ go get github.com/scut-ccmp/gojob
 
 I also provide a simple executable binary which can run jobs over slurm scheduler.
 
-You can download binary in here. [slurm_linux_x64]()
+You can download binary in here. [slurm_linux_x64](https://github.com/scut-ccmp/gojob/releases/tag/slurm-v0.1.0)
 
 ## Examples
 
 ### Vasp over slurm
 
-Download the binary executable ([slurm_linux_x64]())
+Download the binary executable ([slurm_linux_x64](https://github.com/scut-ccmp/gojob/releases/tag/slurm-v0.1.0))
  or build the following go [source code](https://github.com/scut-ccmp/gojob/blob/master/examples/slurm.go) code.
 
 Put the following json config file in `$HOME/.config/gojob/`.
